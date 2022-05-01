@@ -54,13 +54,12 @@ async function run(){
         // update 
         app.put('/inventory/:id', async(req, res) => {
             const id = req.params.id;
-            console.log(id)
-            const updatedRestock = req.body;
+            const updatedStock = req.body;
             const filter = {_id: ObjectId(id)};
             const options = { upsert: true };
             const updatedDoc = {
                 $set: {
-                    quantity: updatedRestock.totalQuantity,
+                    quantity: updatedStock.totalQuantity,
                     // email: updatedRestock.email
                 }
             };
