@@ -68,6 +68,16 @@ async function run(){
         })
 
         // my item collection
+
+        app.get('/myItem', async(req, res) =>{
+            const email = req.query.email;
+            const query = {email: email};
+            const cursor = myItemCollection.find(query);
+            const myItems = await cursor.toArray();
+            res.send(myItems);
+        })
+
+
         app.post('/myItem', async(req, res) =>{
             const myItem = req.body;
             const result = await myItemCollection.insertOne(myItem);
