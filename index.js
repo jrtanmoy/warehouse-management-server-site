@@ -20,6 +20,7 @@ async function run(){
     try{
         await client.connect();
         const inventoryCollection = client.db('groxiwarehouse').collection('inventory');
+        const myItemCollection = client.db('groxiwarehouse').collection('myItem');
 
         app.get('/inventory', async(req, res) =>{
             const quary = {};
@@ -60,10 +61,16 @@ async function run(){
             const updatedDoc = {
                 $set: {
                     quantity: updatedStock.totalQuantity,
-                    // email: updatedRestock.email
                 }
             };
             const result = await inventoryCollection.updateOne(filter, updatedDoc, options);
+            res.send(result);
+        })
+
+        // my item collection
+        app.post('/myItem', async(req, res) =>{
+            const myItem = req.body;
+            const result = await myItemCollection.insertOne(myItem);
             res.send(result);
         })
 
