@@ -52,6 +52,7 @@ async function run() {
             res.send(inventories);
         })
 
+        // inventories get api for id
         app.get('/inventory/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
